@@ -8,7 +8,7 @@ If you are using Maven, you can run the application using ```./mvnw spring-boot:
 
 Or you can build the JAR file with ```./mvnw clean package```. Then you can run the JAR file:
 
-```java -jar target/gs-accessing-data-rest-0.1.0.jar```
+```java -jar target/ougn-2017-p78-rest-application-0.1.0.jar ```
 
 This application is configured to go against an external database thru application.properties
 ```
