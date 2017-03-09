@@ -1,6 +1,7 @@
 from locust import HttpLocust, TaskSet, task, events
 # names : random name generator https://github.com/treyhunner/names
 import names
+import os
 
 def print_error(type, loc, code, reason) :
     print "Error %s %s %s Reason:%s"%(type, code, loc, reason)
@@ -8,13 +9,14 @@ def print_error(type, loc, code, reason) :
 def print_success(type, loc, code) :
     print "Success %s %s %s"%(type, code, loc)
 
-class UserBehavior(TaskSet):
-    host = '10.0.0.27'
-    port = '8080'
-    context = 'people'
-    root = 'http://%s:%s/%s'%(host,port,context)
-    request_header = {"Content-Type" : "application/json"}
+def getTargetURL() :
+    target = os.environ['TARGET_URL']
+    print "Getting target url: %s"%(target)
+    return target
 
+class UserBehavior(TaskSet):
+    root = getTargetURL()
+    request_header = {"Content-Type" : "application/json"}
 
     @task(20)
     def findByFirstName(self):
